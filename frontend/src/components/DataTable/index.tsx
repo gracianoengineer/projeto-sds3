@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { SalePage } from 'types/sale';
-import { totalmem } from 'os';
 import axios from 'axios';
 import { BASE_URL } from 'utils/requests';
 import { formatLocalDate } from 'utils/format';
@@ -28,35 +27,35 @@ const DataTable = () => {
         setActivePage(index);
     }
 
-  return (
-    <>
-        <Pagination page={page} onPagechange={changePage} />
-        <div className="table-responsive">
-            <table className="table table-striped table-sm">
-                <thead>
-                    <tr>
-                        <th>Data</th>
-                        <th>Vendedor</th>
-                        <th>Clientes visitados</th>
-                        <th>Negócios fechados</th>
-                        <th>Valor</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {page.content?.map(x => (
-                        <tr key={x.id}>
-                            <td>{formatLocalDate(x.date, "dd/MM/yyyy")}</td>
-                            <td>{x.seller.name}</td>
-                            <td>{x.visited}</td>
-                            <td>{x.deals}</td>
-                            <td>{x.amount.toFixed(2)}</td>
+    return (
+        <>
+            <Pagination page={page} onPagechange={changePage} />
+            <div className="table-responsive">
+                <table className="table table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Vendedor</th>
+                            <th>Clientes visitados</th>
+                            <th>Negócios fechados</th>
+                            <th>Valor</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    </>
-  );
+                    </thead>
+                    <tbody>
+                        {page.content?.map(x => (
+                            <tr key={x.id}>
+                                <td>{formatLocalDate(x.date, "dd/MM/yyyy")}</td>
+                                <td>{x.seller.name}</td>
+                                <td>{x.visited}</td>
+                                <td>{x.deals}</td>
+                                <td>{x.amount.toFixed(2)}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </>
+    );
 }
 
 export default DataTable;
